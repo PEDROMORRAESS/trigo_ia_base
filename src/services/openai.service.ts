@@ -97,7 +97,9 @@ export const openaiService = {
           tool_choice: 'auto',
           max_tokens: 1024,
         });
-        return response.choices[0].message;
+        const message = response.choices[0]?.message;
+        if (!message) throw new Error('OpenAI returned empty choices');
+        return message;
       },
       { label: 'runAgent' }
     );

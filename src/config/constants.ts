@@ -44,7 +44,7 @@ export const CONFIG = {
 export const WTS_BASE_URL = 'https://api.wts.chat';
 
 // Debounce (ms)
-export const DEBOUNCE_MS = 3000;
+export const DEBOUNCE_MS = 8000;
 
 // Delay between message segments (ms)
 export const MESSAGE_DELAY_MS = 1500;

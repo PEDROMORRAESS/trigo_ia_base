@@ -76,6 +76,15 @@ class RedisService {
       logger.error('Redis deleteLock error', err);
     }
   }
+
+  async disconnect(): Promise<void> {
+    try {
+      await this.client.quit();
+      logger.info('Redis disconnected');
+    } catch (err) {
+      logger.error('Redis disconnect error', err);
+    }
+  }
 }
 
 export const redisService = new RedisService();

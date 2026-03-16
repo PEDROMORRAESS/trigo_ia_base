@@ -52,17 +52,6 @@ export async function searchProducts(query: string, limit = 4): Promise<Product[
     .slice(0, limit);
 }
 
-export async function getProductById(id: string): Promise<Product | null> {
-  const { data, error } = await supabase
-    .from('trigo_products')
-    .select('*')
-    .eq('id', id)
-    .single();
-
-  if (error) return null;
-  return data as Product;
-}
-
 // ─── Catalogs ─────────────────────────────────────────────────────────────────
 
 export async function searchCatalogs(category?: string): Promise<Catalog[]> {

@@ -357,6 +357,12 @@ export async function processWithSmartTrigo(
           args = JSON.parse(tc.function.arguments) as Record<string, unknown>;
         } catch {
           logger.error('Failed to parse tool arguments', tc.function.arguments);
+          session.conversationHistory.push({
+            role: 'tool',
+            content: 'erro: argumentos inválidos',
+            tool_call_id: tc.id,
+          });
+          continue;
         }
 
         const toolResult = await executeTool(tc.function.name, args, session);
@@ -407,16 +413,15 @@ export async function processWithSmartTrigo(
 
     // Fallback: transfer to human
     try {
-      const session = await redisService.getSession(sessionId);
-      if (session && !session.transferred) {
-        await sendSegmented(
-          telefone,
-          'Desculpe o inconveniente. Vou te encaminhar para um de nossos consultores agora.'
-        );
-        await wtsService.transferSession(sessionId);
-        session.transferred = true;
-        await redisService.saveSession(session);
-      }
+      const fallbackSession = await redisService.getSession(sessionId);
+      if (!fallbackSession || fallbackSession.transferred) return;
+      await sendSegmented(
+        telefone,
+        'Desculpe o inconveniente. Vou te encaminhar para um de nossos consultores agora.'
+      );
+      await wtsService.transferSession(sessionId);
+      fallbackSession.transferred = true;
+      await redisService.saveSession(fallbackSession);
     } catch (fallbackErr) {
       logger.error('Error fallback also failed', fallbackErr);
     }

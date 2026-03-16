@@ -34,7 +34,10 @@ async function bootstrap(): Promise<void> {
   async function shutdown(signal: string): Promise<void> {
     logger.info(`${signal} — shutting down gracefully`);
     await worker.close();
-    server.close(() => process.exit(0));
+    server.close(async () => {
+      await redisService.disconnect();
+      process.exit(0);
+    });
   }
 
   process.on('SIGTERM', () => { void shutdown('SIGTERM'); });
