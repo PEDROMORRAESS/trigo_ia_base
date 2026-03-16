@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    networks:
+      - trigo-net
+
+  app:
+    image: trigo-agent:latest
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - ./data:/app/data:ro
+    networks:
+      - trigo-net
+      - Smart
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.trigo.rule=Host(`api.smarttrigo.com`)"
+        - "traefik.http.routers.trigo.entrypoints=websecure"
+        - "traefik.http.routers.trigo.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.trigo.loadbalancer.server.port=3001"
+        - "traefik.docker.network=Smart"
+
+volumes:
+  redis_data:
+
+networks:
+  trigo-net:
+    driver: overlay
+  Smart:
+    external: true

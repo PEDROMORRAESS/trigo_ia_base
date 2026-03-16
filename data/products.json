@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "name": "Sofá Oslo 3 Lugares",
+    "category": "sofa",
+    "environment": ["sala", "sala de estar"],
+    "description": "Sofá de alto padrão com estrutura em madeira maciça e estofamento em veludo importado. Design escandinavo, confortável e elegante.",
+    "materials": ["veludo", "madeira maciça", "espuma de alta densidade"],
+    "colors": ["cinza", "bege", "azul petróleo"],
+    "imageUrl": "",
+    "tags": ["sofá", "3 lugares", "sala", "veludo", "escandinavo", "alto padrão"],
+    "available": true
+  },
+  {
+    "id": "2",
+    "name": "Mesa de Jantar Veneza 6 Lugares",
+    "category": "mesa",
+    "environment": ["sala de jantar", "jantar"],
+    "description": "Mesa de jantar retangular em madeira de lei com acabamento natural. Acompanha 6 cadeiras estofadas com tecido linho.",
+    "materials": ["madeira de lei", "linho", "ferro"],
+    "colors": ["natural", "nogueira"],
+    "imageUrl": "",
+    "tags": ["mesa", "jantar", "6 lugares", "madeira", "conjunto"],
+    "available": true
+  },
+  {
+    "id": "3",
+    "name": "Cama Ravenna King Size",
+    "category": "cama",
+    "environment": ["quarto", "suíte"],
+    "description": "Cama king size com cabeceira estofada em couro legítimo e estrutura em madeira de eucalipto. Ideal para quartos amplos.",
+    "materials": ["couro legítimo", "madeira de eucalipto"],
+    "colors": ["branco off-white", "caramelo", "grafite"],
+    "imageUrl": "",
+    "tags": ["cama", "king", "quarto", "couro", "cabeceira", "suíte"],
+    "available": true
+  },
+  {
+    "id": "4",
+    "name": "Escrivaninha Studio",
+    "category": "escrivaninha",
+    "environment": ["escritório", "home office"],
+    "description": "Escrivaninha para home office com tampo em MDF com acabamento amadeirado, gavetas e passagem para cabos. Estilo contemporâneo.",
+    "materials": ["MDF", "metal"],
+    "colors": ["carvalho", "branco", "preto"],
+    "imageUrl": "",
+    "tags": ["escrivaninha", "escritório", "home office", "gavetas", "mesa de trabalho"],
+    "available": true
+  },
+  {
+    "id": "5",
+    "name": "Poltrona Leitura Nórdica",
+    "category": "poltrona",
+    "environment": ["sala", "quarto", "escritório"],
+    "description": "Poltrona de leitura com design nórdico, pés palito em madeira e assento amplo estofado em bouclê. Confortável e estilosa.",
+    "materials": ["bouclê", "madeira de freixo"],
+    "colors": ["cru", "terracota", "verde musgo"],
+    "imageUrl": "",
+    "tags": ["poltrona", "leitura", "nórdico", "bouclê", "pés palito"],
+    "available": true
+  }
+]
