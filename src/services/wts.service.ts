@@ -58,15 +58,14 @@ export const wtsService = {
   },
 
   /** Send an image to a phone number */
-  async sendMedia(telefone: string, imageUrl: string, caption?: string): Promise<void> {
+  async sendMedia(telefone: string, fileUrl: string, caption?: string): Promise<void> {
     const phone = telefone.replace(/\D/g, '');
     const payload = {
       from: CONFIG.WTS_FROM,
       to: phone,
       body: {
-        type: 'IMAGE',
-        url: imageUrl,
-        ...(caption ? { caption } : {}),
+        fileUrl,
+        ...(caption ? { text: caption } : {}),
       },
     };
     try {
@@ -75,7 +74,7 @@ export const wtsService = {
         payload,
         { headers: headers() }
       );
-      logger.info('Media sent', { to: phone, status: res.status, imageUrl });
+      logger.info('Media sent', { to: phone, status: res.status, fileUrl });
     } catch (err: unknown) {
       const e = err as { response?: { status: number; data: unknown } };
       logger.error('sendMedia failed', { to: phone, status: e.response?.status, data: e.response?.data });
@@ -84,15 +83,14 @@ export const wtsService = {
   },
 
   /** Send a video to a phone number */
-  async sendVideo(telefone: string, videoUrl: string, caption?: string): Promise<void> {
+  async sendVideo(telefone: string, fileUrl: string, caption?: string): Promise<void> {
     const phone = telefone.replace(/\D/g, '');
     const payload = {
       from: CONFIG.WTS_FROM,
       to: phone,
       body: {
-        type: 'VIDEO',
-        url: videoUrl,
-        ...(caption ? { caption } : {}),
+        fileUrl,
+        ...(caption ? { text: caption } : {}),
       },
     };
     try {
@@ -101,7 +99,7 @@ export const wtsService = {
         payload,
         { headers: headers() }
       );
-      logger.info('Video sent', { to: phone, status: res.status, videoUrl });
+      logger.info('Video sent', { to: phone, status: res.status, fileUrl });
     } catch (err: unknown) {
       const e = err as { response?: { status: number; data: unknown } };
       logger.error('sendVideo failed', { to: phone, status: e.response?.status, data: e.response?.data });
@@ -110,15 +108,14 @@ export const wtsService = {
   },
 
   /** Send a document/PDF to a phone number */
-  async sendDocument(telefone: string, documentUrl: string, filename?: string): Promise<void> {
+  async sendDocument(telefone: string, fileUrl: string, caption?: string): Promise<void> {
     const phone = telefone.replace(/\D/g, '');
     const payload = {
       from: CONFIG.WTS_FROM,
       to: phone,
       body: {
-        type: 'DOCUMENT',
-        url: documentUrl,
-        ...(filename ? { filename } : {}),
+        fileUrl,
+        ...(caption ? { text: caption } : {}),
       },
     };
     try {
@@ -127,7 +124,7 @@ export const wtsService = {
         payload,
         { headers: headers() }
       );
-      logger.info('Document sent', { to: phone, status: res.status, documentUrl });
+      logger.info('Document sent', { to: phone, status: res.status, fileUrl });
     } catch (err: unknown) {
       const e = err as { response?: { status: number; data: unknown } };
       logger.error('sendDocument failed', { to: phone, status: e.response?.status, data: e.response?.data });
