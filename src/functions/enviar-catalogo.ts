@@ -19,5 +19,6 @@ export async function enviarCatalogo(
     await wtsService.sendDocument(context.telefone, catalog.pdf_url, catalog.name);
   }
 
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   return `${catalogs.length} catálogo(s) enviado(s)`;
 }

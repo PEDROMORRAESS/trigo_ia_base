@@ -188,6 +188,7 @@ async function executeTool(
       const caption = args.caption as string;
       if (tipo === 'video') {
         await wtsService.sendVideo(context.telefone, url, caption);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
         return 'success: vídeo enviado';
       }
       return await enviarMidia(url, caption, context);
